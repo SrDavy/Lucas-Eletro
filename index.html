@@ -280,6 +280,10 @@
     font-size:16px;
     color:rgba(26,31,35,0.7);
   }
+  .testimonials .section-head h2,
+  .service-area .section-head h2{
+    color:var(--cream);
+  }
 
   /* ---------- Serviço (foco único: fogões) ---------- */
   .service-detail{background:var(--paper);}
@@ -410,7 +414,7 @@
     font-family:'IBM Plex Mono', monospace;
     font-size:36px;
     font-weight:500;
-    color:var(--graphite);
+    color: #FFFFFF; /* Branco */
     display:block;
   }
   .num-item .label{
@@ -465,7 +469,7 @@
   }
   .info-block p, .info-block ul{
     font-size:15.5px;
-    color:rgba(26,31,35,0.8);
+    color:var(--cream);
   }
   .info-block ul{list-style:none; margin-top:6px;}
   .info-block li{
@@ -475,6 +479,7 @@
     border-bottom:1px dotted var(--line);
     font-family:'IBM Plex Mono', monospace;
     font-size:13.5px;
+    color:var(--cream);
   }
   .info-block + .info-block{margin-top:36px;}
 
@@ -628,19 +633,19 @@
 
       <div class="ticket reveal">
         <div class="ticket-head">
-          <span class="os-label">ORDEM DE SERVIÇO</span>
-          <span class="os-num">Nº 0031</span>
+          <span class="os-label" style="color: #FFFFFF;">ORDEM DE SERVIÇO</span>
+          <span class="os-num" style="color: #FFFFFF;">Nº 0031</span>
         </div>
-        <div class="ticket-row"><span>CLIENTE</span><span>Dona Marta</span></div>
+        <div class="ticket-row"><span style="color: #FFFFFF;">CLIENTE</span><span style="color: #FFFFFF;">Dona Marta</span></div>
         <div class="ticket-check">
-          <label><span class="box checked"></span> Gás</label>
-          <label><span class="box"></span> Elétrico</label>
-          <label><span class="box"></span> Cooktop</label>
+          <label style="color: #FFFFFF;"><span class="box checked"></span> Gás</label>
+          <label style="color: #FFFFFF;"><span class="box"></span> Elétrico</label>
+          <label style="color: #FFFFFF;"><span class="box"></span> Cooktop</label>
         </div>
-        <div class="ticket-row"><span>DEFEITO</span><span>Boca não acende</span></div>
-        <div class="ticket-row"><span>DATA</span><span>Qui, 14h</span></div>
-        <div class="ticket-row" style="border-bottom:none;"><span>TÉCNICO</span><span>Lucas</span></div>
-        
+        <div class="ticket-row"><span style="color: #FFFFFF;">DEFEITO</span><span style="color: #FFFFFF;">Boca não acende</span></div>
+        <div class="ticket-row"><span style="color: #FFFFFF;">DATA</span><span style="color: #FFFFFF;">Qui, 14h</span></div>
+        <div class="ticket-row" style="border-bottom:none;"><span style="color: #FFFFFF;">TÉCNICO</span><span style="color: #FFFFFF;">Lucas</span></div>
+        <span class="stamp">Agendado</span>
       </div>
     </div>
   </section>
