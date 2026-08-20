@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lucas Eletro — Conserto de Fogões em Valente-BA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --graphite:#1A1F23;
+    --graphite-2:#20262B;
+    --paper:#F1EDE0;
+    --paper-2:#E7DFC9;
+    --kraft:#D9C6A0;
+    --kraft-dark:#B79F73;
+    --flame:#E15A2E;
+    --flame-dark:#B8451F;
+    --frost:#4A8B96;
+    --frost-dark:#356672;
+    --ink:#1A1F23;
+    --cream:#F1EDE0;
+    --line:rgba(26,31,35,0.18);
+    --line-light:rgba(241,237,224,0.22);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    font-family:'Work Sans', sans-serif;
+    color:var(--ink);
+    background:var(--paper);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3,.display{
+    font-family:'Oswald', sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.01em;
+    line-height:1.05;
+  }
+
+  .mono{
+    font-family:'IBM Plex Mono', monospace;
+  }
+
+  a{color:inherit;text-decoration:none;}
+  img{max-width:100%;display:block;}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 28px;}
+
+  /* ---------- Buttons ---------- */
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    font-family:'Oswald', sans-serif;
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+    font-size:15px;
+    font-weight:600;
+    padding:16px 26px;
+    border-radius:3px;
+    border:2px solid transparent;
+    cursor:pointer;
+    transition:transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  }
+  .btn:active{transform:translateY(1px);}
+  .btn-flame{
+    background:var(--flame);
+    color:var(--cream);
+    box-shadow:4px 4px 0 var(--flame-dark);
+  }
+  .btn-flame:hover{background:var(--flame-dark); box-shadow:2px 2px 0 var(--flame-dark); transform:translate(2px,2px);}
+  .btn-outline{
+    background:transparent;
+    border-color:currentColor;
+    color:var(--cream);
+  }
+  .btn-outline:hover{background:rgba(241,237,224,0.1);}
+  .btn-outline.on-light{color:var(--ink);}
+  .btn-outline.on-light:hover{background:rgba(26,31,35,0.06);}
+
+  /* ---------- Header ---------- */
+  header{
+    position:sticky;
+    top:0;
+    z-index:50;
+    background:var(--graphite);
+    border-bottom:1px solid var(--line-light);
+  }
+  .nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:16px 0;
+    color:var(--cream);
+  }
+  .brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    font-family:'Oswald', sans-serif;
+    font-size:19px;
+    font-weight:600;
+    text-transform:uppercase;
+    letter-spacing:0.02em;
+  }
+  .brand-mark{
+    width:34px;height:34px;
+    border-radius:50%;
+    border:2px solid var(--flame);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .nav-links{
+    display:flex;
+    gap:32px;
+    font-size:14px;
+    letter-spacing:0.03em;
+    text-transform:uppercase;
+    font-weight:500;
+  }
+  .nav-links a{opacity:0.8; transition:opacity 0.15s;}
+  .nav-links a:hover{opacity:1;}
+  .nav-cta{display:flex;}
+  .nav-toggle{display:none;background:none;border:none;color:var(--cream);}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    background:var(--graphite);
+    color:var(--cream);
+    padding:76px 0 96px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero .wrap{
+    display:grid;
+    grid-template-columns:1.05fr 0.85fr;
+    gap:56px;
+    align-items:center;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--frost);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:20px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:26px;height:1px;
+    background:var(--frost);
+    display:inline-block;
+  }
+  .hero h1{
+    font-size:clamp(34px, 4.6vw, 54px);
+    margin-bottom:22px;
+  }
+  .hero h1 em{
+    font-style:normal;
+    color:var(--flame);
+  }
+  .hero p.lead{
+    font-size:17px;
+    max-width:480px;
+    color:rgba(241,237,224,0.82);
+    margin-bottom:32px;
+  }
+  .hero-ctas{
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+    margin-bottom:30px;
+  }
+  .trust-line{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    color:rgba(241,237,224,0.65);
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+  }
+
+  /* ---------- Service ticket (signature element) ---------- */
+  .ticket{
+    background:var(--kraft);
+    color:var(--ink);
+    border-radius:6px;
+    padding:26px 26px 22px;
+    position:relative;
+    box-shadow:0 24px 50px rgba(0,0,0,0.35);
+    transform:rotate(2deg);
+    font-family:'IBM Plex Mono', monospace;
+  }
+  .ticket::before{
+    content:"";
+    position:absolute;
+    top:-14px; left:50%;
+    transform:translateX(-50%);
+    width:26px; height:26px;
+    border-radius:50%;
+    background:var(--graphite);
+    border:5px solid var(--paper-2);
+  }
+  .ticket-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    border-bottom:1.5px dashed var(--kraft-dark);
+    padding-bottom:12px;
+    margin-bottom:16px;
+  }
+  .ticket-head .os-label{font-size:11px; letter-spacing:0.08em; opacity:0.75;}
+  .ticket-head .os-num{font-size:16px; font-weight:600;}
+  .ticket-row{
+    display:flex;
+    justify-content:space-between;
+    font-size:12.5px;
+    padding:7px 0;
+    border-bottom:1px dotted rgba(26,31,35,0.25);
+  }
+  .ticket-row span:first-child{opacity:0.65;}
+  .ticket-check{
+    display:flex;
+    gap:14px;
+    padding:10px 0 12px;
+    font-size:12.5px;
+    flex-wrap:wrap;
+  }
+  .ticket-check label{display:flex; align-items:center; gap:6px;}
+  .ticket-check .box{
+    width:13px;height:13px;
+    border:1.5px solid var(--ink);
+    display:inline-block;
+    border-radius:2px;
+    position:relative;
+  }
+  .ticket-check .box.checked::after{
+    content:"";
+    position:absolute; inset:2px;
+    background:var(--frost-dark);
+    border-radius:1px;
+  }
+  .stamp{
+    position:absolute;
+    right:18px; bottom:22px;
+    border:3px solid var(--flame);
+    color:var(--flame);
+    font-family:'Oswald', sans-serif;
+    font-weight:700;
+    font-size:14px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    padding:6px 12px;
+    border-radius:4px;
+    transform:rotate(-9deg);
+    opacity:0.92;
+  }
+
+  /* ---------- Section shell ---------- */
+  section{padding:96px 0;}
+  .section-head{
+    max-width:620px;
+    margin-bottom:56px;
+  }
+  .section-head .eyebrow{color:var(--frost-dark);}
+  .section-head h2{
+    font-size:clamp(28px, 3.4vw, 40px);
+    color:var(--ink);
+  }
+  .section-head p{
+    margin-top:14px;
+    font-size:16px;
+    color:rgba(26,31,35,0.7);
+  }
+
+  /* ---------- Serviço (foco único: fogões) ---------- */
+  .service-detail{background:var(--paper);}
+  .service-detail .wrap{
+    display:grid;
+    grid-template-columns:0.9fr 1.1fr;
+    gap:48px;
+    align-items:start;
+  }
+  .service-text h3{
+    font-size:15px;
+    letter-spacing:0.05em;
+    color:var(--frost-dark);
+    margin-bottom:12px;
+  }
+  .service-text p{
+    font-size:16px;
+    color:rgba(26,31,35,0.78);
+    margin-bottom:16px;
+  }
+  .service-text .types{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:20px;
+  }
+  .type-pill{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+    padding:8px 14px;
+    border:1.5px solid var(--ink);
+    border-radius:20px;
+  }
+
+  .checklist-card{
+    background:var(--cream);
+    border:1.5px solid var(--line);
+    border-radius:8px;
+    padding:30px 30px 8px;
+    position:relative;
+  }
+  .checklist-card::before{
+    content:"";
+    position:absolute;
+    top:-9px; left:30px;
+    width:16px;height:16px;
+    border-radius:50%;
+    background:var(--paper);
+    border:2px solid var(--ink);
+  }
+  .checklist-card h3{
+    font-family:'Oswald', sans-serif;
+    font-size:18px;
+    text-transform:uppercase;
+    margin-bottom:18px;
+  }
+  .checklist{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    column-gap:24px;
+  }
+  .checklist-item{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:12px 0;
+    border-bottom:1px dotted var(--line);
+    font-size:14.5px;
+  }
+  .checklist-item svg{
+    flex-shrink:0;
+    color:var(--flame);
+  }
+
+  /* ---------- Como funciona ---------- */
+  .how{background:var(--graphite); color:var(--cream);}
+  .how .section-head .eyebrow{color:var(--frost);}
+  .how .section-head h2{color:var(--cream);}
+  .how .section-head p{color:rgba(241,237,224,0.68);}
+  .steps{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:0;
+    border-top:1px solid var(--line-light);
+  }
+  .step{
+    padding:28px 22px 0 0;
+    border-right:1px solid var(--line-light);
+  }
+  .step:last-child{border-right:none;}
+  .step-num{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+    color:var(--flame);
+    margin-bottom:14px;
+    display:block;
+  }
+  .step h3{
+    font-size:17px;
+    margin-bottom:10px;
+    text-transform:none;
+    letter-spacing:0;
+  }
+  .step p{
+    font-size:14px;
+    color:rgba(241,237,224,0.65);
+  }
+
+  /* ---------- Numbers strip ---------- */
+  .numbers{
+    background:var(--kraft);
+    padding:0;
+  }
+  .numbers .wrap{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+  }
+  .num-item{
+    padding:44px 20px;
+    text-align:center;
+    border-right:1px solid var(--kraft-dark);
+  }
+  .num-item:last-child{border-right:none;}
+  .num-item .num{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:36px;
+    font-weight:500;
+    color:var(--graphite);
+    display:block;
+  }
+  .num-item .label{
+    font-size:12.5px;
+    letter-spacing:0.03em;
+    color:rgba(26,31,35,0.68);
+    margin-top:6px;
+    display:block;
+  }
+
+  /* ---------- Depoimentos ---------- */
+  .testimonials{background:var(--paper);}
+  .test-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:24px;
+  }
+  .test-card{
+    background:var(--cream);
+    border-left:3px solid var(--frost-dark);
+    padding:26px 24px;
+    border-radius:2px 8px 8px 2px;
+  }
+  .test-card p.quote{
+    font-size:15px;
+    color:var(--ink);
+    margin-bottom:16px;
+  }
+  .test-card .who{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    color:rgba(26,31,35,0.6);
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+  }
+
+  /* ---------- Atendimento ---------- */
+  .service-area{
+    background:var(--paper-2);
+  }
+  .service-area .wrap{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:48px;
+    align-items:start;
+  }
+  .info-block h3{
+    font-size:15px;
+    letter-spacing:0.05em;
+    color:var(--frost-dark);
+    margin-bottom:10px;
+  }
+  .info-block p, .info-block ul{
+    font-size:15.5px;
+    color:rgba(26,31,35,0.8);
+  }
+  .info-block ul{list-style:none; margin-top:6px;}
+  .info-block li{
+    display:flex;
+    justify-content:space-between;
+    padding:8px 0;
+    border-bottom:1px dotted var(--line);
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13.5px;
+  }
+  .info-block + .info-block{margin-top:36px;}
+
+  /* ---------- CTA final ---------- */
+  .cta-final{
+    background:var(--flame);
+    color:var(--cream);
+    text-align:center;
+    padding:88px 0;
+  }
+  .cta-final h2{
+    font-size:clamp(28px, 4vw, 44px);
+    margin-bottom:16px;
+  }
+  .cta-final p{
+    font-size:16px;
+    opacity:0.92;
+    max-width:480px;
+    margin:0 auto 32px;
+  }
+  .cta-final .btn-flame{
+    background:var(--graphite);
+    box-shadow:4px 4px 0 rgba(0,0,0,0.35);
+  }
+  .cta-final .btn-flame:hover{background:#0f1215;}
+
+  /* ---------- Footer ---------- */
+  footer{
+    background:var(--graphite);
+    color:rgba(241,237,224,0.65);
+    padding:48px 0 28px;
+  }
+  .footer-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    flex-wrap:wrap;
+    gap:24px;
+    padding-bottom:28px;
+    border-bottom:1px solid var(--line-light);
+    margin-bottom:22px;
+  }
+  .footer-brand{
+    color:var(--cream);
+    font-family:'Oswald', sans-serif;
+    font-size:18px;
+    text-transform:uppercase;
+    letter-spacing:0.02em;
+  }
+  .footer-links{
+    display:flex;
+    gap:26px;
+    font-size:13.5px;
+  }
+  .footer-bottom{
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
+    font-size:12.5px;
+    font-family:'IBM Plex Mono', monospace;
+  }
+
+  /* ---------- Reveal on scroll ---------- */
+  .reveal{
+    opacity:0;
+    transform:translateY(18px);
+    transition:opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.is-visible{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    .reveal{opacity:1; transform:none; transition:none;}
+    .ticket{transform:none;}
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 900px){
+    .hero .wrap{grid-template-columns:1fr; gap:48px;}
+    .ticket{max-width:420px; margin:0 auto; transform:rotate(1deg);}
+    .service-detail .wrap{grid-template-columns:1fr;}
+    .steps{grid-template-columns:1fr 1fr; row-gap:32px;}
+    .step{border-right:none; border-bottom:1px solid var(--line-light); padding-bottom:28px;}
+    .step:nth-child(2){border-right:1px solid var(--line-light);}
+    .step:nth-child(4){border-right:1px solid var(--line-light);}
+    .numbers .wrap{grid-template-columns:1fr 1fr; row-gap:0;}
+    .num-item{border-bottom:1px solid var(--kraft-dark);}
+    .num-item:nth-child(2n){border-right:none;}
+    .test-grid{grid-template-columns:1fr;}
+    .service-area .wrap{grid-template-columns:1fr;}
+  }
+
+  @media (max-width: 720px){
+    .nav-links, .nav-cta{display:none;}
+    .nav-toggle{display:block;}
+    section{padding:64px 0;}
+    .footer-top{flex-direction:column;}
+    .checklist{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="brand">
+      <span class="brand-mark">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E15A2E" stroke-width="2"><path d="M4 14c0-4 3-6 3-9 3 2 5 5 5 8a5 5 0 0 1-10 0c0-2 1-3 2-4"/></svg>
+      </span>
+      Lucas Eletro
+    </a>
+    <nav class="nav-links">
+      <a href="#servico">Serviço</a>
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#depoimentos">Depoimentos</a>
+      <a href="#atendimento">Atendimento</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-outline" href="https://wa.me/5575982257650?text=Ol%C3%A1%2C%20Lucas!%20Quero%20agendar%20um%20conserto%20de%20fog%C3%A3o." target="_blank" rel="noopener">Agendar</a>
+    </div>
+    <button class="nav-toggle" aria-label="Menu">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero" style="padding-top:76px;">
+    <div class="wrap">
+      <div class="hero-copy">
+        <div class="eyebrow">Atendimento em domicílio · Valente-BA</div>
+        <h1>Fogão parou de funcionar? <em>Marque um horário</em> e eu resolvo.</h1>
+        <p class="lead">Conserto de fogões a gás, elétricos e cooktops, com garantia e sem enrolação. Você escolhe o dia e o horário — eu chego pontual, com as ferramentas certas para resolver de primeira.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-flame" href="https://wa.me/5575982257650?text=Ol%C3%A1%2C%20Lucas!%20Quero%20agendar%20um%20conserto%20de%20fog%C3%A3o." target="_blank" rel="noopener">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.35 5.07L2 22l5.1-1.33A9.96 9.96 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.6 0-3.1-.43-4.4-1.17l-.31-.18-3.04.8.81-2.95-.2-.31A7.94 7.94 0 0 1 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8z"/></svg>
+            Agendar pelo WhatsApp
+          </a>
+          <a class="btn btn-outline" href="tel:+5575982257650">Ligar agora</a>
+        </div>
+        <div class="trust-line">
+          <span>+30 fogões consertados</span>·<span>3 anos de experiência</span>·<span>atendimento em Valente-BA</span>
+        </div>
+      </div>
+
+      <div class="ticket reveal">
+        <div class="ticket-head">
+          <span class="os-label">ORDEM DE SERVIÇO</span>
+          <span class="os-num">Nº 0031</span>
+        </div>
+        <div class="ticket-row"><span>CLIENTE</span><span>Dona Marta</span></div>
+        <div class="ticket-check">
+          <label><span class="box checked"></span> Gás</label>
+          <label><span class="box"></span> Elétrico</label>
+          <label><span class="box"></span> Cooktop</label>
+        </div>
+        <div class="ticket-row"><span>DEFEITO</span><span>Boca não acende</span></div>
+        <div class="ticket-row"><span>DATA</span><span>Qui, 14h</span></div>
+        <div class="ticket-row" style="border-bottom:none;"><span>TÉCNICO</span><span>Lucas</span></div>
+        <span class="stamp">Agendado</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVIÇO -->
+  <section class="service-detail" id="servico">
+    <div class="wrap">
+      <div class="service-text reveal">
+        <h3 class="mono">O QUE EU CONSERTO</h3>
+        <p>Sou especialista em fogões. Atendo qualquer marca e modelo, resolvendo direto na sua casa, sem precisar levar o aparelho pra oficina.</p>
+        <p>Se não for possível resolver na visita, você recebe o orçamento na hora — sem custo escondido.</p>
+        <div class="types">
+          <span class="type-pill">Fogão a gás</span>
+          <span class="type-pill">Fogão elétrico</span>
+          <span class="type-pill">Cooktop</span>
+        </div>
+      </div>
+
+      <div class="checklist-card reveal">
+        <h3>Problemas mais comuns</h3>
+        <div class="checklist">
+          <div class="checklist-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+            Boca não acende
+          </div>
+          <div class="checklist-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+            Cheiro de gás
+          </div>
+          <div class="checklist-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+            Forno não esquenta
+          </div>
+          <div class="checklist-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+            Faísca fraca ou não pega
+          </div>
+          <div class="checklist-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+            Mesa ou grades desreguladas
+          </div>
+          <div class="checklist-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+            Vazamento de gás
+          </div>
+          <div class="checklist-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+            Timer do forno não funciona
+          </div>
+          <div class="checklist-item">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+            Botões soltos ou quebrados
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMO FUNCIONA -->
+  <section class="how" id="como-funciona">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Do aviso ao conserto</div>
+        <h2>Como funciona o agendamento</h2>
+        <p>Quatro passos, sem complicação, do primeiro contato até o fogão funcionando de novo.</p>
+      </div>
+
+      <div class="steps">
+        <div class="step reveal">
+          <span class="step-num mono">01</span>
+          <h3>Chame no WhatsApp</h3>
+          <p>Conte o que está acontecendo com o fogão. Se puder, manda uma foto ou vídeo.</p>
+        </div>
+        <div class="step reveal">
+          <span class="step-num mono">02</span>
+          <h3>Escolha o horário</h3>
+          <p>Te mostro os horários livres na semana e você escolhe o que encaixa melhor.</p>
+        </div>
+        <div class="step reveal">
+          <span class="step-num mono">03</span>
+          <h3>Eu chego em casa</h3>
+          <p>Pontual, no horário combinado, já com as peças e ferramentas mais usadas.</p>
+        </div>
+        <div class="step reveal">
+          <span class="step-num mono">04</span>
+          <h3>Fogão consertado</h3>
+          <p>Se precisar de peça, o orçamento já sai fechado — sem surpresa na conta.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NÚMEROS -->
+  <div class="numbers">
+    <div class="wrap">
+      <div class="num-item reveal">
+        <span class="num">3</span>
+        <span class="label">anos consertando fogões</span>
+      </div>
+      <div class="num-item reveal">
+        <span class="num">30+</span>
+        <span class="label">atendimentos realizados</span>
+      </div>
+      <div class="num-item reveal">
+        <span class="num">4.9</span>
+        <span class="label">nota média dos clientes</span>
+      </div>
+      <div class="num-item reveal">
+        <span class="num">90</span>
+        <span class="label">dias de garantia no serviço</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- DEPOIMENTOS -->
+  <section class="testimonials" id="depoimentos">
+    <div class="wrap">
+      <div class="section-head reveal">
+        <div class="eyebrow">Quem já chamou</div>
+        <h2>O que os clientes contam</h2>
+      </div>
+
+      <div class="test-grid">
+        <div class="test-card reveal">
+          <p class="quote">"Falei o problema pelo WhatsApp de manhã e à tarde já tinha vaga. Fogão consertado no mesmo dia."</p>
+          <span class="who">Marta S.</span>
+        </div>
+        <div class="test-card reveal">
+          <p class="quote">"Fogão não acendia há duas semanas. Lucas veio, resolveu em 40 minutos e ainda deu dica pra não estragar de novo."</p>
+          <span class="who">Carlos R.</span>
+        </div>
+        <div class="test-card reveal">
+          <p class="quote">"O forno da minha casa não esquentava direito. Foi rapidinho e explicou tudo que fez."</p>
+          <span class="who">Dona Iracema</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ATENDIMENTO -->
+  <section class="service-area" id="atendimento">
+    <div class="wrap">
+      <div class="section-head reveal" style="grid-column:1 / -1; margin-bottom:8px;">
+        <div class="eyebrow">Antes de marcar</div>
+        <h2>Área e horários de atendimento</h2>
+      </div>
+
+      <div class="info-block reveal">
+        <h3 class="mono">ONDE ATENDO</h3>
+        <p>Atendo em Valente-BA e cidades vizinhas. Fora dessa região? Chama no WhatsApp e eu confirmo se dá pra ir.</p>
+      </div>
+
+      <div class="info-block reveal">
+        <h3 class="mono">HORÁRIOS</h3>
+        <ul>
+          <li><span>Segunda a sexta</span><span>8h — 18h</span></li>
+          <li><span>Sábado</span><span>8h — 13h</span></li>
+          <li><span>Domingo</span><span>Fechado</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- CTA FINAL -->
+<section class="cta-final">
+  <div class="wrap">
+    <h2 class="reveal">Marque agora e resolva ainda essa semana</h2>
+    <p class="reveal">Manda uma mensagem contando o problema do fogão. Em poucos minutos eu te mostro os horários livres.</p>
+    <a class="btn btn-flame reveal" href="https://wa.me/5575982257650?text=Ol%C3%A1%2C%20Lucas!%20Quero%20agendar%20um%20conserto%20de%20fog%C3%A3o." target="_blank" rel="noopener">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12c0 1.85.5 3.58 1.35 5.07L2 22l5.1-1.33A9.96 9.96 0 0 0 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.6 0-3.1-.43-4.4-1.17l-.31-.18-3.04.8.81-2.95-.2-.31A7.94 7.94 0 0 1 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8z"/></svg>
+      Chamar no WhatsApp
+    </a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">Lucas Eletro</div>
+      <div class="footer-links">
+        <a href="#servico">Serviço</a>
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#atendimento">Atendimento</a>
+        <a href="tel:+5575982257650">(75) 98225-7650</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Atendimento em domicílio em Valente-BA · Orçamento sem compromisso</span>
+      <span>© 2026 Lucas Eletro — Conserto de Fogões</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(el => io.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('is-visible'));
+  }
+
+  // Mobile menu toggle -> abre direto o WhatsApp em telas pequenas
+  const toggle = document.querySelector('.nav-toggle');
+  if (toggle) {
+    toggle.addEventListener('click', () => {
+      window.open('https://wa.me/5575982257650?text=Ol%C3%A1%2C%20Lucas!%20Quero%20agendar%20um%20conserto%20de%20fog%C3%A3o.', '_blank');
+    });
+  }
+</script>
+
+</body>
+</html>
